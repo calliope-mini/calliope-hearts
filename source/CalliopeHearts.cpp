@@ -54,7 +54,10 @@ int main() {
     uBit.radio.setGroup(227);
 
     while (true) {
-        if (uBit.systemTime() % 1500 < 750) uBit.display.clear();
+        if (uBit.systemTime() % 1500 < 750) {
+            uBit.display.clear();
+            foundPartner = false;
+        }
         else if (foundPartner) uBit.display.print(Heart);
         else uBit.display.image.setPixelValue(2, 2, 255);
         uBit.radio.setTransmitPower(specialAttachmentTransmitPower);
