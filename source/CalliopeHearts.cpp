@@ -13,6 +13,9 @@
  */
 
 #include "MicroBit.h"
+#include "CalliopeHeartsConfig.h"
+
+#ifndef BACKUP
 
 const uint8_t dot[25] = {0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0,
@@ -21,9 +24,9 @@ const uint8_t dot[25] = {0, 0, 0, 0, 0,
                          0, 0, 0, 0, 0
 };
 const uint8_t heart[25] = {0, 1, 0, 1, 0,
-                           1, 1, 1, 1, 1,
-                           1, 1, 1, 1, 1,
-                           0, 1, 1, 1, 0,
+                           1, 0, 1, 0, 1,
+                           1, 0, 0, 0, 1,
+                           0, 1, 0, 1, 0,
                            0, 0, 1, 0, 0
 };
 
@@ -53,8 +56,14 @@ int main() {
     uBit.radio.enable();
     uBit.radio.setGroup(227);
 
+    int counter = 0;
     while (true) {
         if (uBit.systemTime() % 1500 < 750) {
+            if(counter++ % 500 == 0) {
+                uBit.display.scroll("Ich", 180);
+                uBit.display.scroll(Heart, 180);
+                uBit.display.scroll("IT!", 180);
+            }
             uBit.display.clear();
             foundPartner = false;
         }
@@ -65,3 +74,5 @@ int main() {
         uBit.sleep(100);
     }
 }
+
+#endif
