@@ -40,6 +40,7 @@ bool foundPartner = false;
 int specialAttachmentTransmitPower = 1;
 
 void onData(MicroBitEvent event) {
+    (void)event;
     PacketBuffer packet = uBit.radio.datagram.recv();
     const int signalStrength = packet.getRSSI();
     foundPartner = packet.getByte(0) == '!' && signalStrength < 75;
